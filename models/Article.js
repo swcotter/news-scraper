@@ -16,17 +16,65 @@ var ArticleSchema = new Schema({
     type: String,
     required: true
   },
-  // summary: {
-  //   type: String,
-  //   required: true
-  // },
+  //"summary is optional"
+  summary: {
+    type: String,
+    required: true
+  },
+  image: {
+    type: String,
+    required: true
+  },
+  date: {
+      type: Date,
+      required: true
+  },
+  saved: {
+      type: Boolean,
+      default: false
+  },
+
+  //checking for category type
+  business: {
+      type: Boolean,
+      default: false
+  },
+  codeswitch: {
+    type: Boolean,
+    default: false
+  },
+  health: {
+    type: Boolean,
+    default: false
+  },
+  news: {
+    type: Boolean,
+    default: false
+  },
+  politics: {
+    type: Boolean,
+    default: false
+  },
+  science: {
+    type: Boolean,
+    default: false
+  },
+  technology: {
+    type: Boolean,
+    default: false
+  },
+  world: {
+    type: Boolean,
+    default: false
+  },
+
   // `note` is an object that stores a Note id
   // The ref property links the ObjectId to the Note model
   // This allows us to populate the Article with an associated Note
-  note: {
+  noteId: [{
     type: Schema.Types.ObjectId,
     ref: "Note"
-  }
+  }]
 });
 
 // This creates our model from the above schema, using mongoose's model method
