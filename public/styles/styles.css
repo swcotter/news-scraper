@@ -1,0 +1,57 @@
+body {
+    background-color: #237bbd;
+}
+/******************************* jumbotron */
+.jumbotron, .tab-content {
+    background-color: #ffffff;
+    box-shadow: 5px 5px 10px #103958;
+}
+.display-4 {
+    color: #d62021;
+}
+
+/********************************** tabs */
+.nav-tabs, .nav-item {
+    border-radius: 0!important;
+    color: #ffffff;
+}
+.nav-link:hover {
+    color: #ffffff;
+}
+.scrapeButton {
+    border-radius: 0!important;
+    background-color: #d62021;
+}
+/********************************** cards */
+.card {
+    border-radius: 0!important;
+    border: 1px solid #103958;
+}
+.card:hover {    
+    border: 1px solid #d62021;
+}
+.card-header a {
+    color: #103958;
+}
+.card-header a:hover {
+    text-decoration-line: none;
+    color: #d62021;
+
+}
+/******************************** saved */
+#savedArticles {
+    border-radius: 0!important;
+    background-color: #ffffff;
+    box-shadow: 5px 5px 10px #103958;
+}
+
+/******************************** notes */
+
+.noteContent {
+    background-color: #ffffff;
+    box-shadow: 5px 5px 10px #103958;
+
+}
+.close {
+    color: #d62021;
+}
