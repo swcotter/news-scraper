@@ -1,47 +1,45 @@
-// Dependencies
-// =============================================================
 var express = require("express");
-var path = require("path");
+// var logger = require("morgan");
+var mongoose = require("mongoose");
 
-// Sets up the Express App
-// =============================================================
-var app = express();
+// Our scraping tools
+// Axios is a promised-based http library, similar to jQuery's Ajax method
+// It works on the client and on the server
+
+/////////////////////////////////////
+// var axios = require("axios");
+// var cheerio = require("cheerio");
+
+// // Require all models
+// var db = require("./models");
+
 var PORT = 3000;
 
-// Basic route that sends the user first to the AJAX Page
-app.get("/", function (req, res) {
+// Initialize Express
+var app = express();
 
-    const axios = require('axios');
+// Set Handlebars.
+var exphbs = require("express-handlebars");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
+// Configure middleware
 
-    // Optionally the request above could also be done as
-    axios.get('https://www.latimes.com/', {
-        //params: {
-        //ID: 12345
-        //}
-    })
-        .then(function (timesHomeResponse) {
-            res.sendFile(path.join(__dirname, "view.html"));
-            console.log(timesHomeResponse);
-            //res.writeHead(200, { "Content-Type": "text/html" });
+// Use morgan logger for logging requests
+// app.use(logger("dev"));
 
+// Parse request body as JSON
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+// Make public a static folder
+app.use(express.static("public"));
 
-            //res.end(response);
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-        .then(function () {
-            // always executed
-        });
+// Connect to the Mongo DB
+mongoose.connect("mongodb://localhost/scraper", { useNewUrlParser: true });
 
+require("./routes/index.js")(app)
 
-});
-
-// Create New Characters - takes in JSON input
-
-// Starts the server to begin listening
-// =============================================================
-app.listen(PORT, function () {
-    console.log("App listening on PORT " + PORT);
+// Start the server
+app.listen(PORT, function() {
+  console.log("App running on port " + PORT + "!");
 });

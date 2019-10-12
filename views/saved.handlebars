@@ -1,0 +1,64 @@
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">NPR News Scraper</h1>
+        <p class="lead">Use this app to find the latest articles on NPR and even save your favorites!</p>
+        <div class="float-right">
+            <a role="button" class="btn btn-link" href="/"><i class="fas fa-arrow-left"></i> Home</a>
+        </div>
+    </div>
+</div>
+<div class="container p-0">
+    <div class="noteDiv my-3">
+        <div class="noteContent p-4">
+            <form class="noteForm">
+                <div class="form-group">
+                    <h5>Save a Note!</h5>
+                </div>
+                <div class="form-group">
+                    <p>Click the edit button on a saved article to add or edit a note</p>
+                </div>
+                <div class="form-group">
+                    <input class="form-control noteTitle" type="text" placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control noteBody" rows="3" placeholder="Body"></textarea>
+                </div>
+                {{!-- <input type="button" class="btn btn-outline-secondary" id="noteSubmit" id="{{id}}" value="submit" disabled></input> --}}
+            </form>
+            <input type="submit" class="btn btn-outline-secondary" id="noteSubmit" disabled></input>
+        </div>
+    </div>                        
+</div>
+<div class="container p-3 mb-5" id="savedArticles">        
+    <h4 class="mx-3">Saved Articles:</h4>
+    <div class="card-columns m-3">
+        {{#if all}}
+            {{#each all}}
+                {{#if saved}}
+                <div class="card">
+                    <div class="card-header">
+                        <h5><a href="{{link}}">{{title}}</a></h5>
+                    </div>
+                    <img class="card-img-top" src="{{image}}" alt="{{title}}">
+                    <div class="card-body">
+                        <p class="card-text">{{summary}}</p>
+                    </div>
+                    <div class="articleNote">
+                        <h6>{{notes}}</h6>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-secondary unsaveBtn" value="{{id}}"><i
+                                class="fas fa-save"></i> Un-Save</button>
+                        <button type="button" class="btn btn-outline-secondary noteBtn" value="{{id}}"><i
+                                class="fas fa-edit"></i></button>
+                        <a role="button" class="btn btn-outline-secondary" href="{{link}}" target="_blank">NPR <i
+                                class="fas fa-link"></i></a>
+                    </div>
+                </div>
+                {{/if}}
+            {{/each}}
+        {{else}}
+            <h5>Sorry! No articles saved yet.</h5>
+        {{/if}}
+    </div>
+</div>

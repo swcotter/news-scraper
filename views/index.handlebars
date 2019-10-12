@@ -1,0 +1,303 @@
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">NPR News Scraper</h1>
+        <p class="lead">Use this app to find the latest articles on NPR and even save your favorites!</p>
+        <div class="float-right">
+            <a role="button" class="btn btn-link" id="savedLink" href="/saved">Saved Articles <i
+                    class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    {{!-- <div class="noteDiv p-0">
+        <div class="noteContent p-3 mb-4">
+            <form>
+                <div class="form-group pb-4">
+                    <h5 class="float-left">Save a Note!</h5>
+                    <button type="button" class="close float-right" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="form-group">
+                    <input class="form-control noteTitle" type="text" placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control noteBody" rows="3" placeholder="Body"></textarea>
+                </div>
+                <button type="submit" class="btn btn-outline-secondary" id="noteSubmit" value="'id'" disabled>Submit</button>
+            </form>
+        </div>
+    </div> --}}
+    <nav>
+        <div class="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab"
+                aria-controls="nav-all" aria-selected="true">All</a>
+            <a class="nav-item nav-link" id="nav-business-tab" data-toggle="tab" href="#nav-business" role="tab"
+                aria-controls="nav-business" aria-selected="false">Business</a>
+            <a class="nav-item nav-link" id="nav-culture-tab" data-toggle="tab" href="#nav-culture" role="tab"
+                aria-controls="nav-culture" aria-selected="false">Culture</a>
+            <a class="nav-item nav-link" id="nav-health-tab" data-toggle="tab" href="#nav-health" role="tab"
+                aria-controls="nav-health" aria-selected="false">Health</a>
+            <a class="nav-item nav-link" id="nav-politics-tab" data-toggle="tab" href="#nav-politics" role="tab"
+                aria-controls="nav-politics" aria-selected="false">Politics</a>
+            <a class="nav-item nav-link" id="nav-science-tab" data-toggle="tab" href="#nav-science" role="tab"
+                aria-controls="nav-science" aria-selected="false">Science</a>
+            <a class="nav-item nav-link" id="nav-technology-tab" data-toggle="tab" href="#nav-technology" role="tab"
+                aria-controls="nav-technology" aria-selected="false">Technology</a>
+        </div>
+    </nav>
+    <div class="tab-content p-2 mb-5 border-right border-left border-bottom" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+            <div class="d-flex justify-content-end pt-4 pr-4 pb-2">
+                <button type="button" class="btn btn-outline-secondary clearButton" id="clearNews" category="news">Clear
+                    Articles</button>
+                <button type="button" class="btn btn-danger scrapeButton" id="scrapeNews" category="news">Scrape New
+                    Articles</button>
+            </div>
+            <div class="card-columns m-4">
+                {{#each all}}
+                {{#if news}}
+                <div class="card" id="{{id}}">
+                    <div class="card-header">
+                        <h5><a href="{{link}}">{{title}}</a></h5>
+                    </div>
+                    <img class="card-img-top" src="{{image}}" alt="{{title}}">
+                    <div class="card-body">
+                        <p class="card-text">{{summary}}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-secondary saveBtn" value="{{id}}"><i
+                                class="fas fa-save" data-dismiss="card"></i> Save</button>
+                        {{!-- <button type="button" class="btn btn-outline-secondary noteBtn" value="{{id}}"><i
+                                class="fas fa-edit"></i></button> --}}
+
+                        {{!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown button
+                        </button> --}}
+                        <a role="button" class="btn btn-outline-secondary" href="{{link}}" target="_blank">NPR <i
+                                class="fas fa-link"></i></a>
+                    </div>
+                </div>
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-business" role="tabpanel" aria-labelledby="nav-business-tab">
+            <div class="d-flex justify-content-end pt-4 pr-4 pb-2">
+                <button type="button" class="btn btn-outline-secondary clearButton" id="clearBusiness"
+                    category="business">Clear Business Articles</button>
+                <button type="button" class="btn btn-danger scrapeButton" id="scrapeBusiness" category="business">Scrape
+                    New Business Articles</button>
+            </div>
+            <div class="card-columns m-4">
+                {{#each all}}
+                {{#if business}}
+                <div class="card" id="{{id}}">
+                    <div class="card-header">
+                        <h5><a href="{{link}}">{{title}}</a></h5>
+                    </div>
+                    <img class="card-img-top" src="{{image}}" alt="{{title}}">
+                    <div class="card-body">
+                        <p class="card-text">{{summary}}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-secondary saveBtn" value="{{id}}"><i
+                                class="fas fa-save"></i> Save</button>
+                        <button type="button" class="btn btn-outline-secondary noteBtn" value="{{id}}"><i
+                                class="fas fa-edit"></i></button>
+                        <a role="button" class="btn btn-outline-secondary" href="{{link}}" target="_blank">NPR <i
+                                class="fas fa-link"></i></a>
+                    </div>
+                </div>
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-culture" role="tabpanel" aria-labelledby="nav-culture-tab">
+            <div class="d-flex justify-content-end pt-4 pr-4 pb-2">
+                <button type="button" class="btn btn-outline-secondary clearButton" id="clearCulture"
+                    category="codeswitch">Clear Culture Articles</button>
+                <button type="button" class="btn btn-danger scrapeButton" id="scrapeCulture"
+                    category="codeswitch">Scrape New Culture Articles</button>
+            </div>
+            <div class="card-columns m-4">
+                {{#each all}}
+                {{#if codeswitch}}
+                <div class="card" id="{{id}}">
+                    <div class="card-header">
+                        <h5><a href="{{link}}">{{title}}</a></h5>
+                    </div>
+                    <img class="card-img-top" src="{{image}}" alt="{{title}}">
+                    <div class="card-body">
+                        <p class="card-text">{{summary}}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-secondary saveBtn" value="{{id}}"><i
+                                class="fas fa-save"></i> Save</button>
+                        <button type="button" class="btn btn-outline-secondary noteBtn" value="{{id}}"><i
+                                class="fas fa-edit"></i></button>
+                        <a role="button" class="btn btn-outline-secondary" href="{{link}}" target="_blank">NPR <i
+                                class="fas fa-link"></i></a>
+                    </div>
+                </div>
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-health" role="tabpanel" aria-labelledby="nav-health-tab">
+            <div class="d-flex justify-content-end pt-4 pr-4 pb-2">
+                <button type="button" class="btn btn-outline-secondary clearButton" id="clearHealth"
+                    category="health">Clear Health Articles</button>
+                <button type="button" class="btn btn-danger scrapeButton" id="scrapeHealth" category="health">Scrape New
+                    Health Articles</button>
+            </div>
+            <div class="card-columns m-4">
+                {{#each all}}
+                {{#if health}}
+                <div class="card" id="{{id}}">
+                    <div class="card-header">
+                        <h5><a href="{{link}}">{{title}}</a></h5>
+                    </div>
+                    <img class="card-img-top" src="{{image}}" alt="{{title}}">
+                    <div class="card-body">
+                        <p class="card-text">{{summary}}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-secondary saveBtn" value="{{id}}"><i
+                                class="fas fa-save"></i> Save</button>
+                        <button type="button" class="btn btn-outline-secondary noteBtn" value="{{id}}"><i
+                                class="fas fa-edit"></i></button>
+                        <a role="button" class="btn btn-outline-secondary" href="{{link}}" target="_blank">NPR <i
+                                class="fas fa-link"></i></a>
+                    </div>
+                </div>
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-politics" role="tabpanel" aria-labelledby="nav-politics-tab">
+            <div class="d-flex justify-content-end pt-4 pr-4 pb-2">
+                <button type="button" class="btn btn-outline-secondary clearButton" id="clearPolitics"
+                    category="politics">Clear Politics Articles</button>
+                <button type="button" class="btn btn-danger scrapeButton" id="scrapePolitics" category="politics">Scrape
+                    New Politics Articles</button>
+            </div>
+            <div class="card-columns m-4">
+                {{#each all}}
+                {{#if politics}}
+                <div class="card" id="{{id}}">
+                    <div class="card-header">
+                        <h5><a href="{{link}}">{{title}}</a></h5>
+                    </div>
+                    <img class="card-img-top" src="{{image}}" alt="{{title}}">
+                    <div class="card-body">
+                        <p class="card-text">{{summary}}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-secondary saveBtn" value="{{id}}"><i
+                                class="fas fa-save"></i> Save</button>
+                        <button type="button" class="btn btn-outline-secondary noteBtn" value="{{id}}"><i
+                                class="fas fa-edit"></i></button>
+                        <a role="button" class="btn btn-outline-secondary" href="{{link}}" target="_blank">NPR <i
+                                class="fas fa-link"></i></a>
+                    </div>
+                </div>
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-science" role="tabpanel" aria-labelledby="nav-science-tab">
+            <div class="d-flex justify-content-end pt-4 pr-4 pb-2">
+                <button type="button" class="btn btn-outline-secondary clearButton" id="clearScience"
+                    category="science">Clear Science Articles</button>
+                <button type="button" class="btn btn-danger scrapeButton" id="scrapeScience" category="science">Scrape
+                    New Science Articles</button>
+            </div>
+            <div class="card-columns m-4">
+                {{#each all}}
+                {{#if science}}
+                <div class="card" id="{{id}}">
+                    <div class="card-header">
+                        <h5><a href="{{link}}">{{title}}</a></h5>
+                    </div>
+                    <img class="card-img-top" src="{{image}}" alt="{{title}}">
+                    <div class="card-body">
+                        <p class="card-text">{{summary}}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-secondary saveBtn" value="{{id}}"><i
+                                class="fas fa-save"></i> Save</button>
+                        <button type="button" class="btn btn-outline-secondary noteBtn" value="{{id}}"><i
+                                class="fas fa-edit"></i></button>
+                        <a role="button" class="btn btn-outline-secondary" href="{{link}}" target="_blank">NPR <i
+                                class="fas fa-link"></i></a>
+                    </div>
+                </div>
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-technology" role="tabpanel" aria-labelledby="nav-technology-tab">
+            <div class="d-flex justify-content-end pt-4 pr-4 pb-2">
+                <button type="button" class="btn btn-outline-secondary clearButton" id="clearTechnology"
+                    category="technology">Clear Technology Articles</button>
+                <button type="button" class="btn btn-danger scrapeButton" id="scrapeTechnology"
+                    category="technology">Scrape New Technology Articles</button>
+            </div>
+            <div class="card-columns m-4" id="{{id}}">
+                {{#each all}}
+                {{#if technology}}
+                <div class="card">
+                    <div class="card-header">
+                        <h5><a href="{{link}}">{{title}}</a></h5>
+                    </div>
+                    <img class="card-img-top" src="{{image}}" alt="{{title}}">
+                    <div class="card-body">
+                        <p class="card-text">{{summary}}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-secondary saveBtn" value="{{id}}"><i
+                                class="fas fa-save"></i> Save</button>
+                        <button type="button" class="btn btn-outline-secondary noteBtn" value="{{id}}"><i
+                                class="fas fa-edit"></i></button>
+                        <a role="button" class="btn btn-outline-secondary" href="{{link}}" target="_blank">NPR <i
+                                class="fas fa-link"></i></a>
+                    </div>
+                </div>
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-world" role="tabpanel" aria-labelledby="nav-world-tab">
+            <div class="d-flex justify-content-end pt-4 pr-4 pb-2">
+                <button type="button" class="btn btn-outline-secondary clearButton" id="clearWorld"
+                    category="world">Clear World Articles</button>
+                <button type="button" class="btn btn-danger scrapeButton" id="scrapeWorld" category="world">Scrape New
+                    World Articles</button>
+            </div>
+            <div class="card-columns m-4" id="{{id}}">
+                {{#each all}}
+                {{#if world}}
+                <div class="card">
+                    <div class="card-header">
+                        <h5><a href="{{link}}">{{title}}</a></h5>
+                    </div>
+                    <img class="card-img-top" src="{{image}}" alt="{{title}}">
+                    <div class="card-body">
+                        <p class="card-text">{{summary}}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-secondary saveBtn" value="{{id}}"><i
+                                class="fas fa-save"></i> Save</button>
+                        <button type="button" class="btn btn-outline-secondary noteBtn" value="{{id}}"><i
+                                class="fas fa-edit"></i></button>
+                        <a role="button" class="btn btn-outline-secondary" href="{{link}}" target="_blank">NPR <i
+                                class="fas fa-link"></i></a>
+                    </div>
+                </div>
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
